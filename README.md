@@ -28,3 +28,5 @@ Use the same to save a Blend file with the cards solidified in.
 This will result in an always up to date render shown.
 
 ### Add the workflow badge
+
+### Reduce resolution of the rendered file in the scene settings
