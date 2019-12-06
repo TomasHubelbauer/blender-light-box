@@ -26,3 +26,5 @@ Use the same to save a Blend file with the cards solidified in.
 ### Render daily in a GitHub Actions workflow and push to the repo
 
 This will result in an always up to date render shown.
+
+### Add the workflow badge

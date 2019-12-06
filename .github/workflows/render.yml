@@ -1,0 +1,61 @@
+name: render
+on:
+  push:
+    branches:
+    # Limit to the `master` branch
+    - master
+  schedule:
+    # Run daily
+    - cron:  '0 6 * * *'
+jobs:
+  github-actions:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Render the lightbox
+      run: |
+        set -x
+        # Configure Git for the push from the workflow to the repository
+        git config --global user.email "tomas@hubelbauer.net"
+        git config --global user.name "Tomas Hubelbauer"
+        # Check out the `master` branch because by default GitHub Actions checks out detached HEAD
+        git checkout master
+        # Run the script
+        sudo snap install blender --classic
+        blender --background light-box.blend --python script.py --render-output //text_ --engine BLENDER_EEVEE --render-format PNG --use-extension 1 --render-frame 0
+        # Stage the generated data
+        git add text_0000.png
+        # Email the render
+        git clone https://TomasHubelbauer:${{secrets.GITHUB_API_PAT}}@github.com/TomasHubelbauer/self-email.git
+        chmod +x ./self-email/self-email.sh
+        echo "From: Blender Lightbox <bot@hubelbauer.net>" >> email.eml
+        echo "Subject: Blender Lightbox" >> email.eml
+        echo "Content-Type: multipart/related" >> email.eml
+        echo "  boundary=fedcbafedcbafedcbafedcbafedcba" >> email.eml
+        echo "" >> email.eml
+        echo "--fedcbafedcbafedcbafedcbafedcba" >> email.eml
+        echo "Content-Type: text/html" >> email.eml
+        echo "" >> email.eml
+        echo "<img src='' />" >> email.eml
+        echo "" >> email.eml
+        echo "--fedcbafedcbafedcbafedcbafedcba" >> email.eml
+        echo "Content-Id: <bot+render@hubelbauer.net>" >> email.eml
+        echo "Content-Disposition: inline;filename=\"text_0000.png\"" >> email.eml
+        echo "Content-Type: image/png; name=\"text_0000.png\"" >> email.eml
+        echo "Content-Transfer-Encoding: BASE64" >> email.eml
+        echo "" >> email.eml
+        base64 text_0000.png
+        echo "" >> email.eml
+        echo "--fedcbafedcbafedcbafedcbafedcba--" >> email.eml
+        cat email.eml | ./self-email/self-email.sh
+        # Commit the changes to the Git repository if any
+        if git diff-index --quiet HEAD --; then
+          exit
+        fi
+        git commit -m "Capture the render"
+        # Authenticate with GitHub using the custom PAT
+        git remote set-url origin https://tomashubelbauer:${{secrets.GITHUB_API_PAT}}@github.com/${{github.repository}}
+        # Pull before pushing to integrate fast forward changes if any
+        git pull --rebase
+        # Push the generated data to GitHub
+        git push
