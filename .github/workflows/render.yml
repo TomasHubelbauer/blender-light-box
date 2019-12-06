@@ -38,7 +38,7 @@ jobs:
         echo "--fedcbafedcbafedcbafedcbafedcba" >> email.eml
         echo "Content-Type: text/html" >> email.eml
         echo "" >> email.eml
-        echo "<img src='cid:bot+render@hubelbauer.net' />" >> email.eml
+        echo "<img src='cid:bot+render@hubelbauer.net' width='100%' />" >> email.eml
         echo "" >> email.eml
         echo "--fedcbafedcbafedcbafedcbafedcba" >> email.eml
         echo "Content-Id: <bot+render@hubelbauer.net>" >> email.eml
