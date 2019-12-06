@@ -55,8 +55,8 @@ jobs:
           exit
         fi
         git commit -m "Capture the render"
-        # Authenticate with GitHub using the custom PAT
-        git remote set-url origin https://tomashubelbauer:${{secrets.GITHUB_API_PAT}}@github.com/${{github.repository}}
+        # Authenticate with GitHub using the integration PAT in order not to cause another workflow run
+        git remote set-url origin https://tomashubelbauer:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}
         # Pull before pushing to integrate fast forward changes if any
         git pull --rebase
         # Push the generated data to GitHub
