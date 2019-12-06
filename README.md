@@ -30,3 +30,5 @@ Use the same to save a Blend file with the cards solidified in.
 ### Discard cards which would put the card chain over the line size
 
 Probably error out in the Python script.
+
+### Assing a correct translucent material to the card plan
