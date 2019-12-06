@@ -1,6 +1,6 @@
 # Blender Light Box
 
-Designing a light box in Blender.
+![](https://github.com/tomashubelbauer/blender-light-box/workflows/render/badge.svg)
 
 ![](text_0000.png)
 
@@ -20,13 +20,3 @@ Watch `text_0000.png` to refresh in the VS Code preview.
 
 Remove `--background` from the command to open Blender and debug issues.
 Use the same to save a Blend file with the cards solidified in.
-
-## To-do
-
-### Render daily in a GitHub Actions workflow and push to the repo
-
-This will result in an always up to date render shown.
-
-### Add the workflow badge
-
-### Reduce resolution of the rendered file in the scene settings
