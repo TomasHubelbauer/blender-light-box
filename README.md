@@ -34,3 +34,10 @@ Use the same to save a Blend file with the cards solidified in.
 Probably error out in the Python script.
 
 ### Assing a correct translucent material to the card plan
+
+### Figure out how to animate the cards
+
+Extend the script to implement animating the cards in and out of the
+light box.
+
+### Render an animation directly to a Gif or to an MP4 and convert using FFMpeg
