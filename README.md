@@ -25,10 +25,6 @@ Use the same to save a Blend file with the cards solidified in.
 
 ## To-Do
 
-### Center the letters within the cards
-
-### Center the card chain within the line
-
 ### Discard cards which would put the card chain over the line size
 
 Probably error out in the Python script.
