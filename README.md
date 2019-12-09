@@ -37,3 +37,5 @@ Extend the script to implement animating the cards in and out of the
 light box.
 
 ### Render an animation directly to a Gif or to an MP4 and convert using FFMpeg
+
+### Explore the `blf` module for text measurement options
