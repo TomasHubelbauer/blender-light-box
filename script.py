@@ -9,7 +9,7 @@ today = datetime.date.today()
 texts = [
     today.strftime('%b %d'),
     today.strftime('%Y'),
-    today.strftime('%A')
+    today.strftime('%a')
 ]
 
 full_width = .5
