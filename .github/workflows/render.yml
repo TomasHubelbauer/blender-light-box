@@ -20,29 +20,6 @@ jobs:
         blender --background light-box.blend --python script.py --render-output //text_ --engine CYCLES --render-format PNG --use-extension 1 --render-frame 0
         # Stage the generated data
         git add text_0000.png
-        # Email the render
-        git clone https://TomasHubelbauer:${{secrets.GITHUB_API_PAT}}@github.com/TomasHubelbauer/self-email.git
-        chmod +x ./self-email/self-email.sh
-        echo "From: Blender Lightbox <bot@hubelbauer.net>" >> email.eml
-        echo "Subject: Blender Lightbox" >> email.eml
-        echo "Content-Type: multipart/related" >> email.eml
-        echo "  boundary=fedcbafedcbafedcbafedcbafedcba" >> email.eml
-        echo "" >> email.eml
-        echo "--fedcbafedcbafedcbafedcbafedcba" >> email.eml
-        echo "Content-Type: text/html" >> email.eml
-        echo "" >> email.eml
-        echo "<img src='cid:bot+render@hubelbauer.net' width='100%' />" >> email.eml
-        echo "" >> email.eml
-        echo "--fedcbafedcbafedcbafedcbafedcba" >> email.eml
-        echo "Content-Id: <bot+render@hubelbauer.net>" >> email.eml
-        echo "Content-Disposition: inline;filename=\"text_0000.png\"" >> email.eml
-        echo "Content-Type: image/png; name=\"text_0000.png\"" >> email.eml
-        echo "Content-Transfer-Encoding: BASE64" >> email.eml
-        echo "" >> email.eml
-        base64 text_0000.png >> email.eml 
-        echo "" >> email.eml
-        echo "--fedcbafedcbafedcbafedcbafedcba--" >> email.eml
-        cat email.eml | ./self-email/self-email.sh
         # Commit the changes to the Git repository if any
         if git diff-index --quiet HEAD --; then
           exit
