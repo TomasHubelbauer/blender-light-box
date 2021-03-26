@@ -7,9 +7,9 @@ import datetime
 
 today = datetime.date.today()
 texts = [
+    today.strftime('%a'),
     today.strftime('%b %d'),
-    today.strftime('%Y'),
-    today.strftime('%a')
+    today.strftime('%Y')
 ]
 
 full_width = .5
