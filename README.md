@@ -39,3 +39,10 @@ light box.
 ### Render an animation directly to a Gif or to an MP4 and convert using FFMpeg
 
 ### Explore the `blf` module for text measurement options
+
+### Fix the shared file error in the GitHub Actions workflow
+
+```
++ blender --background light-box.blend --python script.py --render-output //text_ --engine CYCLES --render-format PNG --use-extension 1 --render-frame 0
+/usr/lib/blender/blender: error while loading shared libraries: libLLVM-6.0.so.1: cannot open shared object file: No such file or directory
+```
