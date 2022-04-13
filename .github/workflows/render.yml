@@ -5,7 +5,10 @@ jobs:
   github-actions:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Check out the main branch
+      uses: actions/checkout@v3
+      with:
+        ref: master
     - name: Render the lightbox
       run: |
         set -x
@@ -13,8 +16,6 @@ jobs:
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --global user.name "github-actions[bot]"
         # Check out the `master` branch because by default GitHub Actions checks out detached HEAD
-        git checkout master
-        # Run the script
         sudo add-apt-repository ppa:thomas-schiex/blender
         sudo apt-get update
         sudo apt-get install blender llvm-6.0 -y
@@ -26,8 +27,6 @@ jobs:
           exit
         fi
         git commit -m "Capture the render"
-        # Authenticate with GitHub using the integration PAT in order not to cause another workflow run
-        git remote set-url origin https://:${{github.token}}@github.com/${{github.repository}}
         # Pull before pushing to integrate fast forward changes if any
         git pull --rebase
         # Push the generated data to GitHub
