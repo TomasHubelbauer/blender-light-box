@@ -2,7 +2,7 @@ name: render
 on: push
 
 jobs:
-  github-actions:
+  main:
     runs-on: ubuntu-latest
     steps:
     - name: Check out the main branch
